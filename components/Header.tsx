@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { AvatarDemo } from "./AvatarDemo";
 
 const components: { title: string; href: string }[] = [
   {
@@ -60,6 +61,7 @@ export default function Header() {
           {/* <h4 className="text-sm text-gray-600">Full Stack Developer</h4> */}
         </div>
       </div>
+
       <NavigationMenu>
         <NavigationMenuList className="flex gap-4 items-center">
           <NavigationMenuItem>
