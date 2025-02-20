@@ -1,0 +1,57 @@
+"use client";
+
+import * as React from "react";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+export default function DatePickerDemo() {
+  const [date, setDate] = React.useState<string>("");
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !date && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon />
+          {date ? format(date, "PPP") : <span>Pick a date</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-240 p-0" align="start">
+        {/* <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+          className="rounded-md border shadow"
+        /> */}
+        <input
+          type="date"
+          value={date || ""}
+          onChange={(e) => setDate(e.target.value)}
+          className={"px-4 py-2 rounded-sm "}
+        />
+      </PopoverContent>
+    </Popover>
+
+    // <input
+    //   type="date"
+    //   value={date || ""}
+    //   onChange={(e) => setDate(e.target.value)}
+    //   className={"px-4 py-2 rounded-sm w-200"}
+    // />
+  );
+}
