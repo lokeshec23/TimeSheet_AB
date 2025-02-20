@@ -15,7 +15,11 @@ const SideBar = () => {
       path: "/home",
       icon: "/sidebarIcons/home_icon.svg",
     },
-    { title: "Teams", path: "/teams", icon: "/sidebarIcons/teams_icon.svg" },
+    {
+      title: "Dashboard",
+      path: "/dashboard",
+      icon: "/sidebarIcons/teams_icon.svg",
+    },
     {
       title: "Meetings",
       path: "/meetings",
