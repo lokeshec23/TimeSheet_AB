@@ -19,12 +19,12 @@ export default function Home() {
       </div>
 
       {/* Second Column: Developer Feeds */}
-      <div className="px-3  w-1/3  overflow-auto">
+      <div className="px-3  w-1/3  overflow-auto ">
         <DeveloperFeeds />
       </div>
 
       {/* Third Column: Team Info */}
-      <div className="w-1/3  flex items-center justify-center">
+      <div className="w-1/3  px-4 overflow-auto ">
         <TeamInfo />
       </div>
     </div>

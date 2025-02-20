@@ -10,7 +10,13 @@ import {
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
-
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 const DeveloperFeeds = () => {
   const data = [
     {
@@ -102,15 +108,61 @@ const DeveloperFeeds = () => {
     <div>
       <div className="flex justify-between">
         <p className="text-2xl">Feeds</p>
-        <Button className="bg-green-800 text-black px-4 py-2 rounded hover:bg-green-900 transition-colors">
-          <Image
-            src={"/timesheetTable/add.svg"}
-            alt="delete icon"
-            width={20}
-            height={20}
-            className="object-cover"
-          />
-        </Button>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button className="bg-green-800 text-black px-4 py-2 rounded hover:bg-green-900 transition-colors">
+              <Image
+                src={"/timesheetTable/add.svg"}
+                alt="delete icon"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-100 bg-gray-700 rounded-md text-white">
+            <div className="grid gap-4">
+              <div className="space-y-2">
+                <h4 className="font-medium leading-none">Add your feed</h4>
+                {/* <p className="text-sm text-muted-foreground">
+                  Set the dimensions for the layer.
+                </p> */}
+              </div>
+              <div className="grid gap-2">
+                <div className="grid grid-cols-3 items-center gap-4">
+                  <Label htmlFor="width">Title</Label>
+                  <Input
+                    id="width"
+                    // defaultValue="100%"
+                    className="col-span-2 h-8"
+                  />
+                </div>
+                <div className="grid grid-cols-3 items-center gap-4">
+                  <Label htmlFor="maxWidth">Description</Label>
+                  <Input
+                    id="maxWidth"
+                    // defaultValue="300px"
+                    className="col-span-2 h-8"
+                  />
+                </div>
+                <div className="grid grid-cols-3 items-center gap-4">
+                  <Label htmlFor="height">Remarks</Label>
+                  <Input
+                    id="height"
+                    // defaultValue="25px"
+                    className="col-span-2 h-8"
+                  />
+                </div>
+                <div className="grid grid-cols-3 items-center gap-4">
+                  <Button className="bg-white rounded-md text-black hover:bg-white">
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
       {data.map((feed, index) => {
         return (
@@ -123,8 +175,9 @@ const DeveloperFeeds = () => {
               <CardContent>
                 <p>{feed.description}</p>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex justify-between">
                 <p>Posted By - {feed.author}</p>
+                <p className="text-gray-600">{feed.date}</p>
               </CardFooter>
             </Card>
           </Link>

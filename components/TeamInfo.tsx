@@ -1,5 +1,14 @@
 import React from "react";
-
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 const teamsInfo = [
   {
     id: 1,
@@ -169,7 +178,85 @@ const teamsInfo = [
 ];
 
 const TeamInfo = () => {
-  return <div>Team</div>;
+  return (
+    <div className="px-4">
+      {/* Grid Layout */}
+      <p className="text-2xl">Teams</p>
+      <div className="grid grid-cols-1 gap-6">
+        {teamsInfo.map((emp) => (
+          <Card
+            key={emp.employeeID}
+            className="shadow-md hover:shadow-lg transition-shadow"
+          >
+            {/* Card Header */}
+            <CardHeader className="flex flex-row items-center space-x-4 pb-2">
+              {/* Avatar */}
+              <Avatar className="w-12 h-12 border-2 border-gray-200 shadow-sm">
+                <AvatarFallback className="bg-gray-100 text-gray-600 font-medium">
+                  {emp.name.split("").splice(0, 2).join("").toLocaleUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              {/* Name and Designation */}
+              <div>
+                <CardTitle className="text-lg font-semibold">
+                  {emp.name}
+                </CardTitle>
+                <CardDescription className="text-sm text-muted-foreground">
+                  {emp.designation}
+                </CardDescription>
+              </div>
+            </CardHeader>
+
+            {/* Card Content */}
+            <CardContent className="space-y-2">
+              {/* Projects */}
+              <div>
+                <p className="text-sm font-medium">Projects:</p>
+                <div className="flex flex-wrap gap-2">
+                  {emp.projectsWorkingOn.map((project, index) => (
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="text-sm truncate"
+                    >
+                      {project}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              {/* Contact Info */}
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium">Email:</span> {emp.email}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium">Phone:</span> {emp.phone}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium">Location:</span> {emp.address}
+                </p>
+              </div>
+            </CardContent>
+
+            {/* Card Footer */}
+            <CardFooter className="flex justify-between items-center pt-4 border-t">
+              <Badge variant="secondary" className="text-xs">
+                Joined: {emp.joiningDate}
+              </Badge>
+              <a
+                href={emp.linkedinLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-primary hover:underline"
+              >
+                LinkedIn Profile
+              </a>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default TeamInfo;
