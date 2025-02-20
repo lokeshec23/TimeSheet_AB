@@ -6,6 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Button } from "./ui/button";
+import Image from "next/image";
 
 // Define the type for the Timesheet Table
 type TimesheetTable = {
@@ -102,12 +104,19 @@ const TimeSheetTable = () => {
       id: "actions",
       header: () => <span>Actions</span>,
       cell: ({ row }) => (
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        <Button
+          variant="ghost"
+          className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600"
           onClick={() => handleDeleteRow(row.index)}
         >
-          Delete
-        </button>
+          <Image
+            src={"/timesheetTable/delete_icon.svg"}
+            alt="delete icon"
+            width={20}
+            height={20}
+            className="object-cover"
+          />
+        </Button>
       ),
     }),
   ];
@@ -171,21 +180,33 @@ const TimeSheetTable = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-7xl mx-auto p-6 mt-5 bg-white shadow-lg rounded-lg">
       {/* Controls */}
       <div className="flex justify-end gap-5 mb-4">
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+        <Button
+          className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
           onClick={handleSave}
         >
-          Save
-        </button>
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
+          <Image
+            src={"/timesheetTable/save_icon.svg"}
+            alt="save icon"
+            width={20}
+            height={20}
+            className="object-cover"
+          />
+        </Button>
+        <Button
+          className="bg-green-400 text-black px-4 py-2 rounded hover:bg-green-600 transition-colors"
           onClick={handleAddRow}
         >
-          Add Row
-        </button>
+          <Image
+            src={"/timesheetTable/add.svg"}
+            alt="delete icon"
+            width={20}
+            height={20}
+            className="object-cover"
+          />
+        </Button>
       </div>
 
       {/* Table */}
