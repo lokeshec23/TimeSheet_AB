@@ -17,13 +17,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        <div className="flex h-">
-          <SideBar />
-          <div>{children}</div>
+      <body className="flex flex-col h-dvh bg-gray-100 text-gray-800 overflow-y-hidden">
+        {/* Header */}
+        <div className="" style={{ height: "7dvh" }}>
+          <Header />
         </div>
-        <Footer />
+
+        {/* Main Content */}
+        <div className="flex flex-1 " style={{ height: "90dvh" }}>
+          {/* Sidebar */}
+          <aside className="w-[10%]  bg-gray-800 text-white p-4">
+            <SideBar />
+          </aside>
+
+          {/* Main Content Area */}
+          <main className="flex-1 p-6  bg-white-900">{children}</main>
+        </div>
       </body>
     </html>
   );
