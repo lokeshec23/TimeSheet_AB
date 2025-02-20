@@ -8,6 +8,16 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 // Define the type for the Timesheet Table
 type TimesheetTable = {
@@ -24,34 +34,62 @@ const defaultData: TimesheetTable[] = [
   {
     No: "1",
     Project: (
-      <select className="w-full p-2 border rounded">
-        <option>Spectra IQ</option>
-        <option>BNS</option>
-      </select>
+      // <select className="w-full p-2 border rounded">
+      //   <option>Spectra IQ</option>
+      //   <option>BNS</option>
+      // </select>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="blueberry">Blueberry</SelectItem>
+            <SelectItem value="grapes">Grapes</SelectItem>
+            <SelectItem value="pineapple">Pineapple</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     ),
     Module: (
-      <select className="w-full p-2 border rounded">
-        <option>Module A</option>
-        <option>Module B</option>
-      </select>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="moduel a">Module A</SelectItem>
+            <SelectItem value="moduel b">Module B</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     ),
     Task: (
-      <input
+      <Input
         type="text"
         placeholder="Enter task"
         className="w-full p-2 border rounded"
       />
     ),
     Status: (
-      <select className="w-full p-2 border rounded">
-        <option>In Progress</option>
-        <option>Completed</option>
-        <option>Not Started</option>
-      </select>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="inprogress">In progress</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+            <SelectItem value="Yst">Yet to start</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     ),
     Hours: (
-      <input
-        type="number"
+      <Input
+        type="text"
         placeholder="Enter hours"
         className="w-full p-2 border rounded"
       />

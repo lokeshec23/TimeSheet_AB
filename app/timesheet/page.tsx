@@ -1,6 +1,14 @@
 import DatePickerDemo from "@/components/DatePickerDemo";
 import TimeSheetTable from "@/components/TimeSheetTable";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 const TimeSheetPage = async () => {
   return (
     <>
@@ -11,17 +19,17 @@ const TimeSheetPage = async () => {
         </div>
         <div>
           <p>Mode of work</p>
-          <select
-            style={{
-              border: "1px solid black",
-              padding: "5px",
-              background: "lightgray",
-            }}
-          >
-            <option>Select</option>
-            <option>Work From Office</option>
-            <option>Work From Home</option>
-          </select>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="inprogress">Work From Office</SelectItem>
+                <SelectItem value="completed">Work From Home</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <div>
