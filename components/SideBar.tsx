@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import Link from "next/link"; // Assuming you're using Next.js for routing
 import Image from "next/image";
-
+import { usePathname } from "next/navigation";
 const SideBar = () => {
+  const pathname = usePathname(); // Get the current route
   interface NavBarTypes {
     title: string;
     path: string;
@@ -44,24 +46,33 @@ const SideBar = () => {
 
       {/* Navigation Links */}
       <ul className="space-y-2 p-4">
-        {navBarList.map((item) => (
-          <li key={item.title}>
-            <Link
-              href={item.path}
-              className="flex flex-col items-center gap-3 p-2 rounded-md transition-all duration-300 ease-in-out opacity-60 hover:opacity-100 hover:bg-gray-800"
-            >
-              <Image
-                src={item.icon}
-                alt={item.title}
-                width={20}
-                height={20}
-                className="text-gray-400 object-cover"
-              />
+        {navBarList.map((item) => {
+          const isActive = pathname === item.path; // Check if the current item is active
+          return (
+            <li key={item.title}>
+              <Link
+                href={item.path}
+                className={`flex flex-col items-center gap-3 p-2 rounded-md transition-all duration-300 ease-in-out ${
+                  isActive
+                    ? "opacity-100 bg-gray-800 text-white" // Active styles
+                    : "opacity-60 hover:opacity-100 hover:bg-gray-800" // Inactive styles
+                }`}
+              >
+                <Image
+                  src={item.icon}
+                  alt={item.title}
+                  width={20}
+                  height={20}
+                  className={`object-cover ${
+                    isActive ? "text-white" : "text-gray-400"
+                  }`}
+                />
 
-              <div className="text-sm font-medium">{item.title}</div>
-            </Link>
-          </li>
-        ))}
+                <div className="text-sm font-medium">{item.title}</div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

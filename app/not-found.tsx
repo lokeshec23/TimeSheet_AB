@@ -30,7 +30,7 @@ const NotFoundPage = () => {
       {/* Back to Home Button */}
       <Link
         className="mt-6 px-6 py-3 bg-gray-900 text-white rounded-md shadow-md hover:bg-gray-800 transition-colors"
-        href={"/"}
+        href={"/home"}
       >
         Go Back to Home
       </Link>

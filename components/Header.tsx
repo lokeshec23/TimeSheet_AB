@@ -16,6 +16,19 @@ import {
 } from "@/components/ui/navigation-menu";
 import { AvatarDemo } from "./AvatarDemo";
 import { handleClientScriptLoad } from "next/script";
+import { Button } from "./ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const components: { title: string; href: string }[] = [
   {
@@ -53,6 +66,43 @@ const components: { title: string; href: string }[] = [
 
 const handleLogout = () => {};
 
+const getSideMenu = () => {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="outline">Open</Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here. Click save when you're done.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button type="submit">Save changes</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
 export default function Header() {
   return (
     <header className="flex justify-between items-center px-3 py-1 shadow-md bg-white">
@@ -72,18 +122,47 @@ export default function Header() {
               Profile
             </NavigationMenuTrigger>
             <NavigationMenuContent className="bg-white shadow-lg rounded-md p-2">
-              <ul className="flex flex-col w-[180px]">
-                {components.map((component) => (
-                  <li
-                    key={component.title}
-                    className="p-2  hover:bg-gray-100 rounded-md"
-                  >
-                    <Link href={component.href}>
-                      <span className="text-gray-700">{component.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline">Personal Information</Button>
+                </SheetTrigger>
+                <SheetContent className="bg-white">
+                  <SheetHeader>
+                    <SheetTitle>Edit profile</SheetTitle>
+                    <SheetDescription>
+                      Make changes to your profile here. Click save when you're
+                      done.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Name
+                      </Label>
+                      <Input
+                        id="name"
+                        // value="Pedro Duarte"
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Password
+                      </Label>
+                      <Input
+                        id="username"
+                        // value="@peduarte"
+                        className="col-span-3"
+                      />
+                    </div>
+                  </div>
+                  <SheetFooter>
+                    <SheetClose asChild>
+                      <Button type="submit">Save changes</Button>
+                    </SheetClose>
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
