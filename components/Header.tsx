@@ -35,7 +35,7 @@ import Cookies from "js-cookie"; // To manage cookies
 export default function Header() {
   // Navigate to the login page
   const router = useRouter();
-  const userName: string = Cookies.get("userName") || "Dear";
+  const userName: string = Cookies.get("userName");
   const components: { title: string; href: string }[] = [
     {
       title: "Personal Information",

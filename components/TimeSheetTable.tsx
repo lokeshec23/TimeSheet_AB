@@ -19,76 +19,8 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-// Default Data
-const defaultData: TimesheetTable[] = [
-  {
-    No: "1",
-    Project: (
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="apple">Spectra IQ</SelectItem>
-            <SelectItem value="banana">BNS</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    ),
-    Module: (
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="jira">Jira Bug</SelectItem>
-            <SelectItem value="known-issue">known Issuse</SelectItem>
-            <SelectItem value="feature-item">Feature Item</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    ),
-    Task: (
-      <Input
-        type="text"
-        placeholder="Enter task"
-        className="w-full p-2 border rounded"
-      />
-    ),
-    Status: (
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="Yst">Yet to start</SelectItem>
-            <SelectItem value="inprogress">In progress</SelectItem>
-            <SelectItem value="completed">Completed</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    ),
-    Hours: (
-      <Input
-        type="text"
-        placeholder="Enter hours"
-        className="w-full p-2 border rounded"
-      />
-    ),
-  },
-];
-
-// Helper for creating columns
-const columnHelper = createColumnHelper<TimesheetTable>();
-
 // Component
-const TimeSheetTable = () => {
-  const [data, setData] = React.useState<TimesheetTable[]>(() => [
-    ...defaultData,
-  ]);
+const TimeSheetTable = (): Reacrt => {
   type TimesheetTable = {
     No: string;
     Project: JSX.Element;
@@ -97,6 +29,73 @@ const TimeSheetTable = () => {
     Status: JSX.Element;
     Hours: JSX.Element;
   };
+  // Default Data
+  const defaultData: TimesheetTable[] = [
+    {
+      No: "1",
+      Project: (
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="apple">Spectra IQ</SelectItem>
+              <SelectItem value="banana">BNS</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+      Module: (
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="jira">Jira Bug</SelectItem>
+              <SelectItem value="known-issue">known Issuse</SelectItem>
+              <SelectItem value="feature-item">Feature Item</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+      Task: (
+        <Input
+          type="text"
+          placeholder="Enter task"
+          className="w-full p-2 border rounded"
+        />
+      ),
+      Status: (
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="Yst">Yet to start</SelectItem>
+              <SelectItem value="inprogress">In progress</SelectItem>
+              <SelectItem value="completed">Completed</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+      Hours: (
+        <Input
+          type="text"
+          placeholder="Enter hours"
+          className="w-full p-2 border rounded"
+        />
+      ),
+    },
+  ];
+
+  // Helper for creating columns
+  const columnHelper = createColumnHelper<TimesheetTable>();
+  const [data, setData] = React.useState<TimesheetTable[]>(() => [
+    ...defaultData,
+  ]);
   useEffect(() => {
     console.log("data", data);
   }, [data]);
