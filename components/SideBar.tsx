@@ -14,25 +14,25 @@ const SideBar = () => {
   const navBarList: NavBarTypes[] = [
     {
       title: "Home",
-      path: "/home",
+      path: "/v2/home",
       icon: "/sidebarIcons/home_icon.svg",
     },
     {
       title: "Dashboard",
-      path: "/dashboard",
+      path: "/v2/dashboard",
       icon: "/sidebarIcons/teams_icon.svg",
     },
     {
       title: "Meetings",
-      path: "/meetings",
+      path: "/v2/meetings",
       icon: "/sidebarIcons/home_icon.svg",
     },
     {
       title: "Timesheet",
-      path: "/timesheet",
+      path: "/v2/timesheet",
       icon: "/sidebarIcons/timesheet_icon.svg",
     },
-    { title: "LMS", path: "/lms", icon: "/sidebarIcons/lms_icon.svg" },
+    { title: "LMS", path: "/v2/lms", icon: "/sidebarIcons/lms_icon.svg" },
   ];
 
   return (

@@ -29,87 +29,43 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-const components: { title: string; href: string }[] = [
-  {
-    title: "Personal Information",
-    href: "/",
-  },
-  {
-    title: "Change Password",
-    href: "/",
-  },
-  // {
-  //   title: "Progress",
-  //   href: "/docs/primitives/progress",
-  //   description:
-  //     "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  // },
-  // {
-  //   title: "Scroll-area",
-  //   href: "/docs/primitives/scroll-area",
-  //   description: "Visually or semantically separates content.",
-  // },
-  // {
-  //   title: "Tabs",
-  //   href: "/docs/primitives/tabs",
-  //   description:
-  //     "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  // },
-  // {
-  //   title: "Tooltip",
-  //   href: "/docs/primitives/tooltip",
-  //   description:
-  //     "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  // },
-];
-
-const handleLogout = () => {};
-
-const getSideMenu = () => {
-  return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
-  );
-};
+import { useRouter } from "next/navigation"; // For navigation
+import Cookies from "js-cookie"; // To manage cookies
 
 export default function Header() {
+  // Navigate to the login page
+  const router = useRouter();
+  const userName: string = sessionStorage.getItem("userName") || "Dear";
+  const components: { title: string; href: string }[] = [
+    {
+      title: "Personal Information",
+      href: "/",
+    },
+    {
+      title: "Change Password",
+      href: "/",
+    },
+  ];
+
+  const handleLogout = () => {
+    try {
+      // Clear session storage
+      sessionStorage.clear();
+
+      // Clear cookies
+      Cookies.remove("token");
+
+      router.push("/login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   return (
     <header className="flex justify-between items-center px-3 py-1 shadow-md bg-white">
       <div className="flex gap-3 items-center">
         <div>
           <h2 className="text-xl font-semibold text-gray-900">
-            Welcome, Lokesh
+            Welcome, {userName}
           </h2>
           {/* <h4 className="text-sm text-gray-600">Full Stack Developer</h4> */}
         </div>

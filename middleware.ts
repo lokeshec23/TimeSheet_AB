@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
 
   // If the user is authenticated but tries to access login/signup, redirect to home
   if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.redirect(new URL("/v2/home", request.url));
   }
 
   // Otherwise, allow the request to proceed
@@ -35,12 +35,12 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    "/home",
     "/login",
     "/signup",
-    "/timesheet",
-    "/dashboard",
-    "/meetings",
-    "/lms",
+    "/v2/home",
+    "/v2/timesheet",
+    "/v2/dashboard",
+    "/v2/meetings",
+    "/v2/lms",
   ], // Add other routes as needed
 };

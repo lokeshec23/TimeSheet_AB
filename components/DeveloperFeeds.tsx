@@ -166,7 +166,7 @@ const DeveloperFeeds = () => {
       </div>
       {data.map((feed, index) => {
         return (
-          <Link href={`/feeds/${feed.id}`} key={index}>
+          <Link href={`/v2/feeds/${feed.id}`} key={index}>
             <Card className="my-2">
               <CardHeader>
                 <CardTitle>{feed.title}</CardTitle>
