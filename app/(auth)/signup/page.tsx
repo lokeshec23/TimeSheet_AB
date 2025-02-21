@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label"; // Shadcn UI Label
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa"; // Icons for input fields
 import { Separator } from "@/components/ui/separator"; // Shadcn UI Separator
 import Link from "next/link";
-
+import { useToast } from "@/hooks/use-toast";
+import { signupAPI } from "./services/apiRoutes";
 // Define the type for form data
 interface FormData {
   name: string;
@@ -15,6 +16,7 @@ interface FormData {
 }
 
 const SignUp: React.FC = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -28,10 +30,53 @@ const SignUp: React.FC = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+    if (!formData.name || !formData.email || !formData.password) {
+      toast({
+        classType: "error",
+        title: "Invalid input",
+        description: "All fields are mandatory",
+      });
+      return;
+    }
+
+    const isCompanyEmilID =
+      formData.email.split("@")["1"] === "analyticbrains.com";
+    if (!isCompanyEmilID) {
+      toast({
+        classType: "error",
+        title: "Invalid Email Id",
+        description: "Please use offical company email id",
+      });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast({
+        classType: "error",
+        title: "Password Length",
+        description: "Password must be at least 6 characters long",
+      });
+      return;
+    }
+
     // Add your API call or further logic here
+    const response = await signupAPI(formData);
+    if (response?.isError) {
+      toast({
+        classType: "error",
+        title: "Error Occurred!",
+        description: response.message,
+      });
+      return;
+    }
+    toast({
+      classType: "success",
+      title: "Success",
+      description: "You have been successfully signed up",
+    });
+    setFormData({ name: "", email: "", password: "" });
   };
 
   return (
@@ -44,10 +89,18 @@ const SignUp: React.FC = () => {
 
         {/* Social Login Buttons */}
         <div className="flex gap-4 justify-center">
-          <Button variant="outline" className="w-full flex gap-2 items-center">
+          <Button
+            variant="outline"
+            className="w-full flex gap-2 items-center"
+            disabled
+          >
             <FaEnvelope className="text-blue-500" /> Sign up with Email
           </Button>
-          <Button variant="outline" className="w-full flex gap-2 items-center">
+          <Button
+            variant="outline"
+            className="w-full flex gap-2 items-center"
+            disabled
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -87,7 +140,6 @@ const SignUp: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               className="pl-10 w-full"
-              required
             />
             <FaUser className="absolute top-9 left-3 text-gray-400" />
           </div>
@@ -108,7 +160,6 @@ const SignUp: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               className="pl-10 w-full"
-              required
             />
             <FaEnvelope className="absolute top-9 left-3 text-gray-400" />
           </div>
@@ -129,7 +180,6 @@ const SignUp: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               className="pl-10 w-full"
-              required
             />
             <FaLock className="absolute top-9 left-3 text-gray-400" />
           </div>

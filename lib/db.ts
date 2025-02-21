@@ -5,25 +5,25 @@ const MONGODB_URI = process.env.MONGODB_URL;
 const connectDB = async () => {
   const connectionState = mongoose.connection.readyState;
 
-  if (connectionState == 1) {
-    console.log("Already connected");
+  if (connectionState === 1) {
+    console.log("Already connected to the database");
     return;
   }
 
   if (connectionState === 2) {
-    console.log("Connecting...");
+    console.log("Connecting to the database...");
     return;
   }
 
   try {
-    mongoose.connect(MONGODB_URI!, {
-      dbName: "next14restapi",
+    await mongoose.connect(MONGODB_URI!, {
+      dbName: "timesheet-nextjs",
       bufferCommands: true,
     });
-    console.log("DB connection established");
-  } catch (ex: any) {
-    console.log("Error in db connection", ex);
-    throw new Error(ex);
+    console.log("Database connection established");
+  } catch (ex) {
+    console.error("Error connecting to the database:", ex);
+    throw new Error("Database connection failed");
   }
 };
 
