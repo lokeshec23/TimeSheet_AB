@@ -90,6 +90,7 @@ const Login: React.FC = () => {
 
     // Save to cookies (with an expiration time of 1 hour)
     Cookies.set("token", response.token, { expires: 1 / 24 }); // Expires in 1 hour
+    Cookies.set("userName", response.userName, { expires: 1 / 24 }); // Expires in 1 hour
 
     router.push("/v2/home");
     // Add your API call or further logic here

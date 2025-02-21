@@ -19,16 +19,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-// Define the type for the Timesheet Table
-type TimesheetTable = {
-  No: string;
-  Project: JSX.Element;
-  Module: JSX.Element;
-  Task: JSX.Element;
-  Status: JSX.Element;
-  Hours: JSX.Element;
-};
-
 // Default Data
 const defaultData: TimesheetTable[] = [
   {
@@ -53,8 +43,9 @@ const defaultData: TimesheetTable[] = [
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="moduel a">Module A</SelectItem>
-            <SelectItem value="moduel b">Module B</SelectItem>
+            <SelectItem value="jira">Jira Bug</SelectItem>
+            <SelectItem value="known-issue">known Issuse</SelectItem>
+            <SelectItem value="feature-item">Feature Item</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -73,9 +64,9 @@ const defaultData: TimesheetTable[] = [
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
+            <SelectItem value="Yst">Yet to start</SelectItem>
             <SelectItem value="inprogress">In progress</SelectItem>
             <SelectItem value="completed">Completed</SelectItem>
-            <SelectItem value="Yst">Yet to start</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -98,6 +89,14 @@ const TimeSheetTable = () => {
   const [data, setData] = React.useState<TimesheetTable[]>(() => [
     ...defaultData,
   ]);
+  type TimesheetTable = {
+    No: string;
+    Project: JSX.Element;
+    Module: JSX.Element;
+    Task: JSX.Element;
+    Status: JSX.Element;
+    Hours: JSX.Element;
+  };
   useEffect(() => {
     console.log("data", data);
   }, [data]);
@@ -184,8 +183,9 @@ const TimeSheetTable = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="moduel a">Module A</SelectItem>
-              <SelectItem value="moduel b">Module B</SelectItem>
+              <SelectItem value="jira">Jira Bug</SelectItem>
+              <SelectItem value="known-issue">known Issuse</SelectItem>
+              <SelectItem value="feature-item">Feature Item</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
