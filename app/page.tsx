@@ -1,16 +1,24 @@
+// app/page.tsx
+"use client"; // Required for client-side code
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 export default function Home() {
-  return (
-    <div>
-      <div>
-        {/* Events */}
-        <div>Events</div>
-        {/* upcoming events */}
-        <div></div>
-      </div>
-      {/* developer space */}
-      <div></div>
-      {/* team info */}
-      <div></div>
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if the token exists in sessionStorage
+    const token = sessionStorage.getItem("token");
+
+    if (token) {
+      // If token exists, navigate to /home
+      router.push("/home");
+    } else {
+      // If no token, navigate to /login
+      router.push("/login");
+    }
+  }, [router]);
+
+  return null; // Render nothing while redirecting
 }
