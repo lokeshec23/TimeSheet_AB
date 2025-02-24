@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -10,7 +10,7 @@ export function TooltipDemo({
   children,
   title = "",
 }: {
-  children: any;
+  children: React.ReactNode;
   title: string;
 }) {
   return (

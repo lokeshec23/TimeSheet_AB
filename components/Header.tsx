@@ -1,21 +1,21 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+// import Link from "next/link";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
+  // NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  // navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { AvatarDemo } from "./AvatarDemo";
-import { handleClientScriptLoad } from "next/script";
+// import { AvatarDemo } from "./AvatarDemo";
+// import { handleClientScriptLoad } from "next/script";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,16 +41,16 @@ export default function Header() {
     setUserName(Cookies.get("userName") || "Dear"); // Load username from cookies on client
   }, []);
 
-  const components: { title: string; href: string }[] = [
-    {
-      title: "Personal Information",
-      href: "/",
-    },
-    {
-      title: "Change Password",
-      href: "/",
-    },
-  ];
+  // const components: { title: string; href: string }[] = [
+  //   {
+  //     title: "Personal Information",
+  //     href: "/",
+  //   },
+  //   {
+  //     title: "Change Password",
+  //     href: "/",
+  //   },
+  // ];
 
   const handleLogout = () => {
     try {
@@ -88,8 +88,8 @@ export default function Header() {
                   <SheetHeader>
                     <SheetTitle>Edit profile</SheetTitle>
                     <SheetDescription>
-                      Make changes to your profile here. Click save when you're
-                      done.
+                      Make changes to your profile here. Click save when
+                      you&apos;re done.
                     </SheetDescription>
                   </SheetHeader>
                   <div className="grid gap-4 py-4">

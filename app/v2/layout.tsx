@@ -3,7 +3,6 @@ import "../globals.css";
 
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: `Timesheet AB`,

@@ -2,15 +2,15 @@ import React from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+  // CardDescription,
+  // CardFooter,
+  // CardHeader,
+  // CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+// import { Input } from "./ui/input";
+// import { Button } from "./ui/button";
 const PermissionPage = () => {
   return (
     <Card>

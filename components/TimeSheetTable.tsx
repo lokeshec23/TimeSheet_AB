@@ -13,14 +13,13 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
 // Component
-const TimeSheetTable = (): React.FC => {
+const TimeSheetTable = () => {
   type TimesheetTable = {
     No: string;
     Project: JSX.Element;

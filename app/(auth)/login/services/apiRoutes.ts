@@ -17,8 +17,13 @@ export const loginAPI = async (formData: FormData) => {
 
     // Return the successful response data
     return response.json();
-  } catch (ex: any) {
-    console.error("Error in signupAPI:", ex.message);
-    throw new Error(ex.message); // Re-throw the error with the server's message
+  } catch (ex: unknown) {
+    if (ex instanceof Error) {
+      console.error("Error in signupAPI:", ex.message);
+      throw new Error(ex.message); // Re-throw the error with the server's message
+    } else {
+      console.error("Unexpected error:", ex);
+      throw new Error("An unknown error occurred");
+    }
   }
 };

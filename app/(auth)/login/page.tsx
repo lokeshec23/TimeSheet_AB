@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input"; // Shadcn UI Input
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { Label } from "@/components/ui/label"; // Shadcn UI Label
@@ -211,7 +211,7 @@ const Login: React.FC = () => {
 
         {/* Footer */}
         <p className="text-center text-sm text-gray-600">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-indigo-600 hover:underline">
             Sign up
           </Link>

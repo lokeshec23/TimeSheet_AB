@@ -1,7 +1,8 @@
 import connectDB from "@/lib/db";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,10 +37,18 @@ export async function POST(req: NextRequest) {
       { message: "User registered successfully", userId: newUser.insertedId },
       { status: 202 }
     );
-  } catch (ex: any) {
+  } catch (ex: unknown) {
     console.error("Error during registration:", ex);
+
+    if (ex instanceof Error) {
+      return NextResponse.json(
+        { message: "Server error", error: ex.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { message: "Server error", error: ex.message },
+      { message: "Server error", error: "An unknown error occurred" },
       { status: 500 }
     );
   }
