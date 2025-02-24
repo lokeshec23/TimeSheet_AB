@@ -35,7 +35,11 @@ import Cookies from "js-cookie"; // To manage cookies
 export default function Header() {
   // Navigate to the login page
   const router = useRouter();
-  const userName: string = Cookies.get("userName");
+  const [userName, setUserName] = React.useState<string | null>(null);
+  React.useEffect(() => {
+    setUserName(Cookies.get("userName") || "Dear"); // Load username from cookies on client
+  }, []);
+
   const components: { title: string; href: string }[] = [
     {
       title: "Personal Information",
@@ -63,12 +67,9 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center px-3 py-1 shadow-md bg-white">
       <div className="flex gap-3 items-center">
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900">
-            Welcome, {userName}
-          </h2>
-          {/* <h4 className="text-sm text-gray-600">Full Stack Developer</h4> */}
-        </div>
+        <h2 className="text-xl font-semibold text-gray-900">
+          Welcome, {userName}
+        </h2>
       </div>
 
       <NavigationMenu>

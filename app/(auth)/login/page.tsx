@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Input } from "@/components/ui/input"; // Shadcn UI Input
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { Label } from "@/components/ui/label"; // Shadcn UI Label
@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { loginAPI } from "./services/apiRoutes";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 // Define the type for form data
 interface FormData {
   email: string;
@@ -17,6 +18,7 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   // Redirect to /v2/home
   const router = useRouter();
@@ -33,67 +35,71 @@ const Login: React.FC = () => {
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    debugger;
-    e.preventDefault();
-    if (!formData.email || !formData.password) {
+    try {
+      setLoading(true);
+      e.preventDefault();
+      if (!formData.email || !formData.password) {
+        toast({
+          classType: "error",
+          title: "Invalid input",
+          description: "All fields are mandatory",
+        });
+        return;
+      }
+
+      const isCompanyEmilID =
+        formData.email.split("@")["1"] === "analyticbrains.com";
+      if (!isCompanyEmilID) {
+        toast({
+          classType: "error",
+          title: "Invalid Email Id",
+          description: "Please use offical company email id",
+        });
+        return;
+      }
+
+      if (formData.password.length < 6) {
+        toast({
+          classType: "error",
+          title: "Password Length",
+          description: "Password must be at least 6 characters long",
+        });
+        return;
+      }
+      // Simulate API call for successful login
+      const response = await loginAPI(formData);
+      if (response?.isError) {
+        toast({
+          classType: "error",
+          title: "Error Occurred!",
+          description: response.message,
+        });
+        return;
+      }
       toast({
-        classType: "error",
-        title: "Invalid input",
-        description: "All fields are mandatory",
+        classType: "success",
+        title: "Success",
+        description: "You have been successfully signed up",
       });
-      return;
+      setFormData({ email: "", password: "" });
+      setLoading(false);
+      // Save the token to session storage and cookies
+      // const { token, username }: { token: string; username: string } =
+      //   response.token;
+
+      // Save to session storage
+      sessionStorage.setItem("token", response.token);
+      sessionStorage.setItem("userName", response.userName);
+
+      // Save to cookies (with an expiration time of 1 hour)
+      Cookies.set("token", response.token, { expires: 1 / 24 }); // Expires in 1 hour
+      Cookies.set("userName", response.userName, { expires: 1 / 24 }); // Expires in 1 hour
+
+      router.push("/v2/home");
+    } catch (ex) {
+      console.error("err", ex);
+    } finally {
     }
-
-    const isCompanyEmilID =
-      formData.email.split("@")["1"] === "analyticbrains.com";
-    if (!isCompanyEmilID) {
-      toast({
-        classType: "error",
-        title: "Invalid Email Id",
-        description: "Please use offical company email id",
-      });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast({
-        classType: "error",
-        title: "Password Length",
-        description: "Password must be at least 6 characters long",
-      });
-      return;
-    }
-    // Simulate API call for successful login
-    const response = await loginAPI(formData);
-    if (response?.isError) {
-      toast({
-        classType: "error",
-        title: "Error Occurred!",
-        description: response.message,
-      });
-      return;
-    }
-    toast({
-      classType: "success",
-      title: "Success",
-      description: "You have been successfully signed up",
-    });
-    setFormData({ email: "", password: "" });
-
-    // Save the token to session storage and cookies
-    // const { token, username }: { token: string; username: string } =
-    //   response.token;
-
-    // Save to session storage
-    sessionStorage.setItem("token", response.token);
-    sessionStorage.setItem("userName", response.userName);
-
-    // Save to cookies (with an expiration time of 1 hour)
-    Cookies.set("token", response.token, { expires: 1 / 24 }); // Expires in 1 hour
-    Cookies.set("userName", response.userName, { expires: 1 / 24 }); // Expires in 1 hour
-
-    router.push("/v2/home");
-    // Add your API call or further logic here
   };
 
   return (
@@ -193,9 +199,11 @@ const Login: React.FC = () => {
 
           {/* Submit Button */}
           <Button
+            disabled={loading}
             type="submit"
             className="w-full bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-semibold py-2 rounded-lg transition duration-300"
           >
+            {loading && <Loader2 className="animate-spin" />}
             Log In
           </Button>
         </form>

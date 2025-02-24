@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator"; // Shadcn UI Separator
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { signupAPI } from "./services/apiRoutes";
+import { Loader2 } from "lucide-react";
 // Define the type for form data
 interface FormData {
   name: string;
@@ -17,6 +18,7 @@ interface FormData {
 
 const SignUp: React.FC = () => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -32,6 +34,7 @@ const SignUp: React.FC = () => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     if (!formData.name || !formData.email || !formData.password) {
       toast({
         classType: "error",
@@ -77,6 +80,7 @@ const SignUp: React.FC = () => {
       description: "You have been successfully signed up",
     });
     setFormData({ name: "", email: "", password: "" });
+    setLoading(false);
   };
 
   return (
@@ -186,9 +190,11 @@ const SignUp: React.FC = () => {
 
           {/* Submit Button */}
           <Button
+            disabled={loading}
             type="submit"
             className="w-full bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-semibold py-2 rounded-lg transition duration-300"
           >
+            {loading && <Loader2 className="animate-spin" />}
             Sign Up
           </Button>
         </form>

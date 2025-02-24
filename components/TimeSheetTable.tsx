@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 // Component
-const TimeSheetTable = (): Reacrt => {
+const TimeSheetTable = (): React.FC => {
   type TimesheetTable = {
     No: string;
     Project: JSX.Element;
