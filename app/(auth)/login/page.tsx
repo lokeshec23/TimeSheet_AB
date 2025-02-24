@@ -205,7 +205,7 @@ const Login: React.FC = () => {
             className="w-full bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-semibold py-2 rounded-lg transition duration-300"
           >
             {loading && <Loader2 className="animate-spin" />}
-            Log In
+            Log In 
           </Button>
         </form>
 
