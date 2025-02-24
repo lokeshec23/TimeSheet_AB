@@ -6,7 +6,7 @@ const UserSchema = new Schema(
     username: { type: "string", required: true, unique: true },
     password: { type: "string", required: true },
   },
-  { timestamps: true }
+  { timestamps: true  }
 );
 
 const User = models.User || model("User", UserSchema);
