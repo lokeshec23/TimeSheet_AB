@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,8 +15,9 @@ import {
 } from "@/components/ui/table";
 import { PencilIcon, UsersIcon, CodeIcon, CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
-
+import { useTheme } from "@/context/ContextHook";
 const EditProjectPage = () => {
+  const { projectEdit } = useTheme();
   // Sample project data (replace this with API data or state management)
   const [project, setProject] = useState({
     id: 1,
@@ -35,6 +36,10 @@ const EditProjectPage = () => {
       { name: "Bob Brown", emailId: "bob.brown@example.com" },
     ],
   });
+
+  useEffect(() => {
+    setProject(projectEdit);
+  }, [projectEdit]);
 
   // Handle input changes
   const handleInputChange = (

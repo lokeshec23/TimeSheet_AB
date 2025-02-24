@@ -6,7 +6,12 @@ import CompanyDetail from "@/components/CompanyDetail";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PencilIcon, UsersIcon, CodeIcon, CheckCircleIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "@/context/ContextHook";
+
 const AdminPage = () => {
+  const routes = useRouter();
+  const { setProjectEdit } = useTheme();
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -61,13 +66,14 @@ const AdminPage = () => {
     productManagement: [{ name: "Mike", emailId: "mike@example.com" }],
   });
 
-  const handleCompanyChange = (field: any, value: any) => {
-    setCompany((prev) => ({ ...prev, [field]: value }));
-  };
+  // const handleCompanyChange = (field: any, value: any) => {
+  //   setCompany((prev) => ({ ...prev, [field]: value }));
+  // };
   const handleEdit = (projectId: number) => {
     console.log(`Edit project with ID: ${projectId}`);
-    // Implement edit functionality here
-    
+    const findProject = projects.find((p) => p.id === projectId);
+    setProjectEdit(findProject);
+    routes.push("/v2/admin/editProject");
   };
   return (
     <div className="p-6 max-w-3xl mx-auto">

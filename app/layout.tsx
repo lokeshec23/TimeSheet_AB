@@ -1,6 +1,6 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
+import { ContextProvider } from "@/context/ContextHook";
 
 export const metadata: Metadata = {
   title: "Signup - Timesheet AB",
@@ -14,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col h-dvh ">{children}</body>
+      <body className="flex flex-col h-dvh ">
+        <ContextProvider>{children}</ContextProvider>
+      </body>
     </html>
   );
 }
