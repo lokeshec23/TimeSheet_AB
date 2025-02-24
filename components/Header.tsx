@@ -36,6 +36,7 @@ export default function Header() {
   // Navigate to the login page
   const router = useRouter();
   const [userName, setUserName] = React.useState<string | null>(null);
+
   React.useEffect(() => {
     setUserName(Cookies.get("userName") || "Dear"); // Load username from cookies on client
   }, []);

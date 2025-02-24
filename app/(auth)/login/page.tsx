@@ -74,6 +74,7 @@ const Login: React.FC = () => {
           title: "Error Occurred!",
           description: response.message,
         });
+        setLoading(false);
         return;
       }
       toast({

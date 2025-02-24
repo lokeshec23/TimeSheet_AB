@@ -33,6 +33,7 @@ const SideBar = () => {
       icon: "/sidebarIcons/timesheet_icon.svg",
     },
     { title: "LMS", path: "/v2/lms", icon: "/sidebarIcons/lms_icon.svg" },
+    { title: "Admin", path: "/v2/admin", icon: "/sidebarIcons/admin_icon.svg" },
   ];
 
   return (
