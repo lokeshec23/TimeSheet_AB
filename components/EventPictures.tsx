@@ -6,7 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 export function Eventpicture() {
@@ -52,7 +52,7 @@ export function Eventpicture() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <img src={item.imageLink} alt={`image-${index}`} />
+                      <Image src={item.imageLink} alt={`image-${index}`} />
                     </Link>
                   </CardContent>
                 </Card>

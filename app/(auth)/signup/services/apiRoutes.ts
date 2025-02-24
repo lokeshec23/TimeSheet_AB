@@ -26,8 +26,13 @@ export const signupAPI = async (formData: FormData) => {
 
     // Return the successful response data
     return response.json();
-  } catch (ex: any) {
-    console.error("Error in signupAPI:", ex.message);
-    throw new Error(ex.message); // Re-throw the error with the server's message
+  } catch (ex: unknown) {
+    console.error("Error in signupAPI:", ex);
+
+    if (ex instanceof Error) {
+      throw new Error(ex.message); // Re-throw with server's message
+    } else {
+      throw new Error("An unknown error occurred"); // Generic error if ex is not an Error object
+    }
   }
 };

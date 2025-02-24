@@ -22,11 +22,11 @@ import { Input } from "@/components/ui/input";
 const TimeSheetTable = () => {
   type TimesheetTable = {
     No: string;
-    Project: JSX.Element;
-    Module: JSX.Element;
-    Task: JSX.Element;
-    Status: JSX.Element;
-    Hours: JSX.Element;
+    Project: React.ReactNode;
+    Module: React.ReactNode;
+    Task: React.ReactNode;
+    Status: React.ReactNode;
+    Hours: React.ReactNode;
   };
   // Default Data
   const defaultData: TimesheetTable[] = [
