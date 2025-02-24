@@ -52,7 +52,14 @@ export function Eventpicture() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Image src={item.imageLink} alt={`image-${index}`} />
+                      <Image
+                        src={item.imageLink}
+                        alt={`image-${index}`}
+                        className="object-cover"
+                        width={900} // Adjust width
+                        height={900} // Adjust height
+                        layout="responsive"
+                      />
                     </Link>
                   </CardContent>
                 </Card>
